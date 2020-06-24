@@ -1,0 +1,95 @@
+\section{Paso 1:Descargar SonarQube} 
+docker pull sonarqube
+\begin{itemize}
+    \item  En mi caso ya se descargo el Sonarqube
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/1}\newline
+\end{center}
+\section{Paso 2: Ejecutar una instancia de SonarQube } 
+\begin{itemize}
+    \item docker run -d --name sonarqube -p 9000:9000 sonarqube
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/2}\newline
+\end{center}
+\section{Paso 3: Ingresar al portal con las credenciales } 
+\begin{itemize}
+    \item http://localhost:9000/
+    \item 192.168.99.100:9000
+    \item user: admin
+    \item pass:admin
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/3}\newline
+\end{center}
+\section{Paso 4: Crear una nueva aplicación con el nombre aplicacionNetCore } 
+\begin{center}
+\includegraphics[width=\columnwidth]{images/4}\newline
+\end{center}
+\section{Paso 5: Generar el token de la nueva aplicación aplicacionNetCore, debera devolver algo similar a 8a15d2a89c8636f15eb32ebee0993b8d16bff94e } 
+\begin{center}
+\includegraphics[width=\columnwidth]{images/5}\newline
+\includegraphics[width=\columnwidth]{images/6}\newline
+\includegraphics[width=\columnwidth]{images/7}\newline
+\includegraphics[width=\columnwidth]{images/8}\newline
+\end{center}
+\section{Decargar Net Core e instalar} 
+
+\begin{itemize}
+    \item  https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.300-windows-x64-installer
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/18}\newline
+\end{center}
+
+\section{En un terminal ejecutar e instalar sonar-scanner} 
+Ya lo tengo instalado en mi ordenador
+\begin{itemize}
+    \item  dotnet tool install --global dotnet-sonarscanner
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/10}\newline
+\end{center}
+\section{En un terminal, acceder a una ruta donde creara una nueva aplicacion } 
+\begin{itemize}
+    \item dotnet new sln -o aplicacionNetCore 
+    \item cd aplicacionNetCore 
+    \item dotnet new console
+    \item dotnet sln aplicacionNetCore.sln add aplicacionNetCore.csproj 
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/11}\newline
+\includegraphics[width=\columnwidth]{images/12}\newline
+
+\end{center}
+\section{ En el mismo terminal, iniciar la sesión de revisión de sonarqube } 
+\begin{itemize}
+    \item dotnet SonarScanner begin /k:"aplicacionNetCore" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="e7e2acdf4d6e5469cd486b29068f0b5ab9d8ad2e"
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/13}\newline
+\end{center}
+\section{ Compilar la aplicación } 
+\begin{itemize}
+    \item dotnet build
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/14}\newline
+\end{center}
+\section{ Cerramos la sesión } 
+\begin{itemize}
+    \item dotnet SonarScanner end /d:sonar.login="e7e2acdf4d6e5469cd486b29068f0b5ab9d8ad2e"
+\end{itemize}
+\begin{center}
+\includegraphics[width=\columnwidth]{images/15}\newline
+\includegraphics[width=\columnwidth]{images/16}\newline
+
+\end{center}
+\begin{itemize}
+    \item Como Resulatado Final
+    \begin{center}
+
+\includegraphics[width=\columnwidth]{images/17}\newline
+\end{center}
+\end{itemize}
